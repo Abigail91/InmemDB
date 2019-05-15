@@ -11,7 +11,16 @@ public class Nodo <T> implements java.io.Serializable{
 	 */
 	private T data;
 	private Nodo<T> next;
+	private String tipo;
 	
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
 	/**
 	 * Constructor de la clase Nodo que 
 	 * inicializa los atributos en nulo
@@ -19,6 +28,7 @@ public class Nodo <T> implements java.io.Serializable{
 	public Nodo() {
 		this.data = null;
 		this.next = null;
+		
 	}
 	
 	/**

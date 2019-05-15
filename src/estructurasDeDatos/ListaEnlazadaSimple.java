@@ -46,6 +46,24 @@ public class ListaEnlazadaSimple<T> {
 
 		}
 		
+		public void addLast(T data,String tipo) {
+			Nodo <T> newNodo = new Nodo <T>();
+			newNodo.setData(data);
+			newNodo.setTipo(tipo);
+			if(isEmpty()) {
+				this.setFirst(newNodo);
+				len += 1;}
+			else {
+				Nodo <T> aux = this.getFirst();
+				while (aux.getNext()!= null) {
+					aux = aux.getNext();}
+				aux.setNext(newNodo);
+				len+=1;
+
+			}
+
+		}
+		
 		
 		public void deleteLast() {
 			Nodo<T> aux = new Nodo<T>();

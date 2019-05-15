@@ -14,9 +14,9 @@ public class HashTable<K,T> extends Hashtable{
 	public static void main(String args[]) {
 		Hashtable<String, HashTable> Tabla = new Hashtable<String, HashTable>();
 		ListaEnlazadaSimple<String> lista = new ListaEnlazadaSimple<String>();
-		lista.addLast("Cedula");
-		lista.addLast("Carné");
-		lista.addLast("Nombre");
+		lista.addLast("Cedula","int");
+		lista.addLast("Carné","int");
+		lista.addLast("Nombre","String");
 		ListaEnlazadaSimple<String> tipos = new ListaEnlazadaSimple<String>();
 		tipos.addLast("int");
 		tipos.addLast("int");
@@ -31,34 +31,39 @@ public class HashTable<K,T> extends Hashtable{
 		lista3.addLast("1");
 		lista3.addLast("117463");
 		lista3.addLast("Victoria");
+		
+		ListaEnlazadaSimple<String> lista4 = new ListaEnlazadaSimple<String>();
+		lista4.addLast("2");
+		lista4.addLast("11");
+		lista4.addLast("Haziel");
 	
 		
 		
-		nuevo_esquema(lista,"Estudiantes",tipos);
+		nuevo_esquema(lista,"Estudiantes");
 		HashTable.agregar_fila(lista2,"Estudiantes");
 		HashTable.agregar_fila(lista3,"Estudiantes");
-		HashTable.eliminar_fila("1","Estudiantes");
+		//HashTable.eliminar_fila("1","Estudiantes");
 		System.out.println(baseDeDatos.tablas);
+		HashTable.agregar_fila(lista4,"Estudiantes");
 		eliminar_esquema("Estudiantes");
+		
 		
 	}
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public static void nuevo_esquema(ListaEnlazadaSimple<String> titulos,String nombre,ListaEnlazadaSimple<String> tipo) {
+	public static void nuevo_esquema(ListaEnlazadaSimple<String> titulos,String nombre) {
 		ListaEnlazadaSimple<HashTable> tabla = new ListaEnlazadaSimple();
 		tabla.setNombre(nombre);
 		Nodo<String> aux = titulos.getFirst();
-		Nodo<String> aux2 = tipo.getFirst();
 		while (aux != null) {
 			HashTable<String,String> columna = new HashTable<String,String>();
 			columna.nombre = aux.getData();
-			columna.tipo = aux2.getData();
+			columna.tipo = aux.getTipo();
 			tabla.addLast(columna);
 			aux = aux.getNext();
-			aux2 = aux2.getNext();
-			}
+			}  
 		
 		baseDeDatos.tablas.put(nombre,tabla);
 		tabla.print();
