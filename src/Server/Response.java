@@ -6,7 +6,6 @@ public class Response {
 	int codigo;
 	String nombre_tabla;
 	ListaEnlazadaSimple<String> fila;
-	ListaEnlazadaSimple<String> tipo;
 	
 	
 

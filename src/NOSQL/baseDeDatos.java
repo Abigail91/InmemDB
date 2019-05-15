@@ -1,9 +1,7 @@
 package NOSQL;
 
 import java.io.IOException;
-import java.util.Hashtable;
 
-import Serializador.Serializador;
 import estructurasDeDatos.ListaEnlazadaSimple;
 
 public class baseDeDatos {
