@@ -23,8 +23,7 @@ public class ListaEnlazadaSimple<T> {
 			len = 0;
 			setFirst(null);}
 
-		public boolean isEmpty() {
-			return this.getFirst() == null; }
+		
 
 		public int getLen() {
 			return this.len;}
@@ -32,7 +31,7 @@ public class ListaEnlazadaSimple<T> {
 		public void addLast(T data) {
 			Nodo <T> newNodo = new Nodo <T>();
 			newNodo.setData(data);
-			if(isEmpty()) {
+			if(this.getFirst() == null) {
 				this.setFirst(newNodo);
 				len += 1;}
 			else {
@@ -50,7 +49,7 @@ public class ListaEnlazadaSimple<T> {
 			Nodo <T> newNodo = new Nodo <T>();
 			newNodo.setData(data);
 			newNodo.setTipo(tipo);
-			if(isEmpty()) {
+			if(this.getFirst() == null) {
 				this.setFirst(newNodo);
 				len += 1;}
 			else {
@@ -68,7 +67,7 @@ public class ListaEnlazadaSimple<T> {
 		public void deleteLast() {
 			Nodo<T> aux = new Nodo<T>();
 			aux = getFirst();
-			if(isEmpty() || len == 1 ) {
+			if(this.getFirst() == null || len == 1 ) {
 				setFirst(null);
 			}
 			else {
