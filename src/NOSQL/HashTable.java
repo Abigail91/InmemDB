@@ -12,15 +12,11 @@ public class HashTable<K,T> extends Hashtable{
 	public String tipo;
 
 	public static void main(String args[]) {
-		Hashtable<String, HashTable> Tabla = new Hashtable<String, HashTable>();
 		ListaEnlazadaSimple<String> lista = new ListaEnlazadaSimple<String>();
 		lista.addLast("Cedula","int");
 		lista.addLast("Carné","int");
 		lista.addLast("Nombre","String");
-		ListaEnlazadaSimple<String> tipos = new ListaEnlazadaSimple<String>();
-		tipos.addLast("int");
-		tipos.addLast("int");
-		tipos.addLast("String");
+
 		
 		ListaEnlazadaSimple<String> lista2 = new ListaEnlazadaSimple<String>();
 		lista2.addLast("117690345");
@@ -42,10 +38,11 @@ public class HashTable<K,T> extends Hashtable{
 		nuevo_esquema(lista,"Estudiantes");
 		HashTable.agregar_fila(lista2,"Estudiantes");
 		HashTable.agregar_fila(lista3,"Estudiantes");
-		//HashTable.eliminar_fila("1","Estudiantes");
+		HashTable.eliminar_fila("117690345","Estudiantes");
 		System.out.println(baseDeDatos.tablas);
 		HashTable.agregar_fila(lista4,"Estudiantes");
 		eliminar_esquema("Estudiantes");
+		
 		
 		
 	}
