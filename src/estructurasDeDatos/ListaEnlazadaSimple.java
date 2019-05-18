@@ -21,8 +21,8 @@ public class ListaEnlazadaSimple<T> implements java.io.Serializable {
 
 		public ListaEnlazadaSimple() {
 			len = 0;
-			setFirst(null);
-			}
+		}
+
 
 		
 		public int getLen() {
@@ -31,7 +31,7 @@ public class ListaEnlazadaSimple<T> implements java.io.Serializable {
 		public void addLast(T data) {
 			Nodo <T> newNodo = new Nodo <T>();
 			newNodo.setData(data);
-			if(this.getFirst()==null) {
+			if(this.first ==null) {
 				this.setFirst(newNodo);
 				len += 1;}
 			else {
@@ -49,7 +49,11 @@ public class ListaEnlazadaSimple<T> implements java.io.Serializable {
 			Nodo <T> newNodo = new Nodo <T>();
 			newNodo.setData(data);
 			newNodo.setTipo(tipo);
-			if(this.getFirst()==null) {
+
+			
+
+			if(this.getFirst() == null) {
+
 				this.setFirst(newNodo);
 				len += 1;}
 			else {
@@ -67,7 +71,9 @@ public class ListaEnlazadaSimple<T> implements java.io.Serializable {
 		public void deleteLast() {
 			Nodo<T> aux = new Nodo<T>();
 			aux = getFirst();
+
 			if(this.getFirst()==null || len == 1 ) {
+
 				setFirst(null);
 			}
 			else {
