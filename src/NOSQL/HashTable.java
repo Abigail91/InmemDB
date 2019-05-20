@@ -50,7 +50,7 @@ public class HashTable<K,T> extends Hashtable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public static void nuevo_esquema(ListaEnlazadaSimple<String> titulos,String nombre) {
+	public static ListaEnlazadaSimple nuevo_esquema(ListaEnlazadaSimple<String> titulos,String nombre) {
 		ListaEnlazadaSimple<HashTable> tabla = new ListaEnlazadaSimple();
 		tabla.setNombre(nombre);
 		Nodo<String> aux = titulos.getFirst();
@@ -63,8 +63,8 @@ public class HashTable<K,T> extends Hashtable{
 			}  
 		
 		baseDeDatos.tablas.put(nombre,tabla);
-		tabla.print();
-		System.out.println();
+		
+		return tabla;
 		
 		
 	}
@@ -76,15 +76,12 @@ public class HashTable<K,T> extends Hashtable{
 		while (aux != null) {
 			aux2.getData().put(nuevo_dato.getFirst().getData(),aux.getData());
 			
-			System.out.println(aux2.getData().tipo);
+			
 			aux = aux.getNext();
 			aux2 = aux2.getNext();
 			
 			}
-		
-		tab.print();
-		
-		System.out.println();
+	
 		
 	}
 	public static void eliminar_fila(String dato, String tabla) {

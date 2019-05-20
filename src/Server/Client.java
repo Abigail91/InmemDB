@@ -32,7 +32,7 @@ public class Client{
     public  void start()   { 
         try{ 
         	
-        	FileReader reader = new FileReader("C:\\Users\\mario\\Desktop\\datos 1\\InmemDB\\resources\\ClientProperties.properties");
+        	FileReader reader = new FileReader("C:\\Users\\abiga\\Desktop\\InmemDB\\resources\\ClientProperties.properties");
 		
 			properties = new Properties();
 	
