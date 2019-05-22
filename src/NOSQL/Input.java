@@ -138,19 +138,8 @@ public class Input {
                                         JOptionPane.showMessageDialog(null, "Ingrese el tipo correcto de dato");
                                 }
                                
-                              ListaEnlazadaSimple l = HashTable.nuevo_esquema(lista, "Sofia");
-                              ListaEnlazadaSimple<String> lista2 = new ListaEnlazadaSimple<String>();
-                      		lista2.addLast("117690345");
-                      		lista2.addLast("2018117463");
-                      		lista2.addLast("Abigail");
-                      		
-                      		ListaEnlazadaSimple<String> lista3 = new ListaEnlazadaSimple<String>();
-                      		lista3.addLast("1");
-                      		lista3.addLast("117463");
-                      		lista3.addLast("Victoria");
-                      		HashTable.agregar_fila(lista2,"Sofia");
-                      		HashTable.agregar_fila(lista3,"Sofia");
-                              new wind((ListaEnlazadaSimple<HashTable>) baseDeDatos.tablas.get("Sofia"));
+                             
+                            //  new wind((ListaEnlazadaSimple<HashTable>) baseDeDatos.tablas.get("Sofia"));
                                                            
                                 
                        }
