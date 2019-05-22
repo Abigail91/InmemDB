@@ -11,6 +11,9 @@ import java.io.*;
 
 public class Server {
 	
+	
+	private static Server servidor = new Server();
+	
 	private ServerSocket server;
 	
 	private Socket socket;
@@ -21,6 +24,12 @@ public class Server {
 	
 	private DataInputStream entrada;
 	
+	private baseDeDatos bdserver = new baseDeDatos();
+	
+	private Server() {
+		
+	}
+	
 	public void start() {
 		try {
 			server = new ServerSocket(port);
@@ -30,16 +39,11 @@ public class Server {
 				socket = new Socket();
 				
 				socket = server.accept();
-				
-				System.out.println("Se ha conectado un nuevo cliente");
-	            System.out.println();
-	            
+
 	            salida = new ObjectOutputStream(socket.getOutputStream());
 	            
 	            entrada = new DataInputStream(socket.getInputStream());
-	            
-	            
-	            
+	               
 	            Thread hilo = new ServerThread(socket,salida,entrada);
 	            
 	            hilo.start();
@@ -52,19 +56,27 @@ public class Server {
 		}
 	}
 	
-	public static void main(String args[]) {
-	    Server server = new Server();
-	    server.start();
-	    }
+	public static Server getInstance() {
+		return Server.servidor;
+	}
+	
+	public baseDeDatos getBData() {
+		return this.bdserver;
+	}
+	
+	public static void main(String[] args) {
+		Server servidor = Server.getInstance();
+		servidor.start();
+	}
 }
 
-class ServerThread extends Thread{
+class  ServerThread extends Thread{
 
 	private Socket socket;
 	
 	private ObjectOutputStream salida;
-	private DataInputStream entrada;
 	
+	private DataInputStream entrada;
 	
 	public ServerThread(Socket socket,ObjectOutputStream salida,DataInputStream entrada) {
 		this.socket = socket;
@@ -72,13 +84,11 @@ class ServerThread extends Thread{
 		this.entrada = entrada;
 	}
 	
-	public void run() {
+	public synchronized void run() {
 		
 		String in;
 		String out;
 		
-		while(true) {
-			
 			try {
 				in = entrada.readUTF();
 				
@@ -92,43 +102,43 @@ class ServerThread extends Thread{
                     
                     //indica que la conexion con el cliente se ha cerrado
                     System.out.println("Conexion cerrada"); 
-                    break;
                     
+                    return;
                 }
 				
-				Response response = Serializador.deserializar(in);
+				Response response = Serializador.deserializar(in);		
 				if (response.getCodigo() == 1) {
 					
-					HashTable.nuevo_esquema(response.getFila(),response.getNombre_tabla());
-					
-					
+					HashTable.nuevo_esquema(response.getFila(),response.getNombre_tabla(),Server.getInstance().getBData());	
 					salida.writeObject("Se creo la tabla: "+ response.getNombre_tabla());
 		
 				}
 				
 				else if (response.getCodigo() == 2) {
 					
-					HashTable.agregar_fila(response.getFila(),response.getNombre_tabla());
+					HashTable.agregar_fila(response.getFila(), response.getNombre_tabla(), Server.getInstance().getBData());
 					
 					salida.writeObject("Se agrego fila a la tabla: " + response.getNombre_tabla());
 				}
 				
 				else if (response.getCodigo() == 3) {
 					
-					HashTable.eliminar_fila(response.getDato(),response.getNombre_tabla());
+					HashTable.eliminar_fila(response.getDato(),response.getNombre_tabla(),Server.getInstance().getBData());
 					
 					salida.writeObject("Se elimino fila de la tabla: " + response.getNombre_tabla());
 				}
 				
 				else if (response.getCodigo() == 4) {
-					
-					ListaEnlazadaSimple<HashTable> tabla = (ListaEnlazadaSimple<HashTable>) baseDeDatos.tablas.get(response.getNombre_tabla());
+
+					ListaEnlazadaSimple<HashTable> tabla = (ListaEnlazadaSimple<HashTable>) Server.getInstance().getBData().getTablas().get(response.getNombre_tabla());
+					tabla.print();
 					
 					salida.writeObject(tabla);
+					
 				}
 				
 				else if (response.getCodigo() == 5) {
-					HashTable.eliminar_esquema(response.getNombre_tabla());
+					HashTable.eliminar_esquema(response.getNombre_tabla(),Server.getInstance().getBData());
 					salida.writeObject("Se eliminado la tabla: " + response.getNombre_tabla());
 				}
 				
@@ -137,7 +147,6 @@ class ServerThread extends Thread{
 				System.out.println("Error dentro del while");
 				System.out.println(e.getMessage());
 			}
-		}
 		try {
 			this.entrada.close(); 
 	        this.salida.close();
@@ -147,27 +156,6 @@ class ServerThread extends Thread{
 			System.out.println(e.getMessage());
 		}
 	}
+	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -6,7 +6,11 @@ public class ListaEnlazadaSimple<T> implements java.io.Serializable {
 		private int len;
 		public Nodo <T> first;
 		public String nombre;
-
+		
+		public ListaEnlazadaSimple() {
+			len = 0;
+		}
+		
 		public String getNombre() {
 			return nombre;
 		}
@@ -19,12 +23,6 @@ public class ListaEnlazadaSimple<T> implements java.io.Serializable {
 			this.len = len;
 		}
 
-		public ListaEnlazadaSimple() {
-			len = 0;
-		}
-
-
-		
 		public int getLen() {
 			return this.len;}
 

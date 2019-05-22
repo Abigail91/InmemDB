@@ -33,15 +33,22 @@ public class HashTable<K,T> extends Hashtable{
 		lista4.addLast("11");
 		lista4.addLast("Haziel");
 	
+		baseDeDatos based = new baseDeDatos();
+		
+		nuevo_esquema(lista,"Estudiantes",based);
+		HashTable.agregar_fila(lista2,"Estudiantes",based);
 		
 		
-		nuevo_esquema(lista,"Estudiantes");
-		HashTable.agregar_fila(lista2,"Estudiantes");
-		HashTable.agregar_fila(lista3,"Estudiantes");
-		HashTable.eliminar_fila("117690345","Estudiantes");
-		System.out.println(baseDeDatos.tablas);
-		HashTable.agregar_fila(lista4,"Estudiantes");
-		eliminar_esquema("Estudiantes");
+		ListaEnlazadaSimple<HashTable> listap = (ListaEnlazadaSimple<HashTable>) based.getTablas().get("Estudiantes");
+		listap.print();
+		
+		//HashTable.agregar_fila(lista3,"Estudiantes");
+		HashTable.eliminar_fila("117690345","Estudiantes",based);
+		//System.out.println(baseDeDatos.tablas);
+		//HashTable.agregar_fila(lista4,"Estudiantes");
+		//eliminar_esquema("Estudiantes");
+		ListaEnlazadaSimple<HashTable> listap1 = (ListaEnlazadaSimple<HashTable>) based.getTablas().get("Estudiantes");
+		listap1.print();
 		
 		
 		
@@ -50,7 +57,7 @@ public class HashTable<K,T> extends Hashtable{
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	public static void nuevo_esquema(ListaEnlazadaSimple<String> titulos,String nombre) {
+	public static void nuevo_esquema(ListaEnlazadaSimple<String> titulos,String nombre, baseDeDatos bdatos) {
 		ListaEnlazadaSimple<HashTable> tabla = new ListaEnlazadaSimple();
 		tabla.setNombre(nombre);
 		Nodo<String> aux = titulos.getFirst();
@@ -61,16 +68,12 @@ public class HashTable<K,T> extends Hashtable{
 			tabla.addLast(columna);
 			aux = aux.getNext();
 			}  
-		
-		baseDeDatos.tablas.put(nombre,tabla);
-		tabla.print();
-		System.out.println();
-		
-		
+		bdatos.getTablas().put(nombre,tabla);
 	}
 	
-	public static void agregar_fila(ListaEnlazadaSimple<String> nuevo_dato,String tabla) {
-		ListaEnlazadaSimple<HashTable> tab = (ListaEnlazadaSimple<HashTable>) baseDeDatos.tablas.get(tabla);
+	public static void agregar_fila(ListaEnlazadaSimple<String> nuevo_dato,String tabla, baseDeDatos bdatos) {
+		
+		ListaEnlazadaSimple<HashTable> tab =  (ListaEnlazadaSimple<HashTable>) bdatos.getTablas().get(tabla);
 		Nodo<String> aux = nuevo_dato.getFirst();
 		Nodo<HashTable> aux2 = tab.getFirst();
 		while (aux != null) {
@@ -87,8 +90,8 @@ public class HashTable<K,T> extends Hashtable{
 		System.out.println();
 		
 	}
-	public static void eliminar_fila(String dato, String tabla) {
-		ListaEnlazadaSimple<HashTable> tab = (ListaEnlazadaSimple<HashTable>) baseDeDatos.tablas.get(tabla);
+	public static void eliminar_fila(String dato, String tabla,baseDeDatos bdatos) {
+		ListaEnlazadaSimple<HashTable> tab =  (ListaEnlazadaSimple<HashTable>) (bdatos.getTablas().get(tabla));
 		Nodo<HashTable> aux2 = tab.getFirst();
 		while (aux2 != null) {
 			aux2.getData().remove(dato);
@@ -115,10 +118,11 @@ public class HashTable<K,T> extends Hashtable{
 			
 		}
 	}
-	public static void eliminar_esquema(String nombre) {
+	
+	public static void eliminar_esquema(String nombre,baseDeDatos bdatos) {
 		
-		baseDeDatos.tablas.remove(nombre);
-		System.out.println(baseDeDatos.tablas);
+		bdatos.getTablas().remove(nombre);
+		System.out.println(bdatos.getTablas());
 		System.out.println();
 		
 		

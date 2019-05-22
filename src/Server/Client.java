@@ -15,16 +15,10 @@ import estructurasDeDatos.ListaEnlazadaSimple;
 
 public class Client{
 
-		private Socket client;
-
 		private int port;
 
 		private String ip;
-
-		private DataOutputStream salida;
-		
-		private ObjectInputStream entrada;
-		
+	
 		private Properties properties;
 		
 		private Thread thread;
@@ -42,13 +36,8 @@ public class Client{
 	
 			port = Integer.parseInt(properties.getProperty("server.port"));
 
-			client = new Socket(ip,port); 
+			thread = new ClientThread(ip,port);
 			
-			salida = new DataOutputStream (client.getOutputStream());
-			
-			entrada = new ObjectInputStream (client.getInputStream());
-			
-			thread = new ClientThread(client,salida,entrada);
 			thread.start();
 			
         }
@@ -67,16 +56,13 @@ public class Client{
 
 class ClientThread extends Thread{
 	
-	private DataOutputStream salida;
+	private int port;
+
+	private String ip;
 	
-	private ObjectInputStream entrada;
-		
-	private Socket client;
-	
-	public ClientThread( Socket socket, DataOutputStream salida,ObjectInputStream entrada) {
-		this.client = socket;
-		this.salida = salida;
-	    this.entrada = entrada; 
+	public ClientThread(String ip, int port) {
+		this.ip = ip;
+		this.port = port;
 	}
 	
 	public void run() {
@@ -84,9 +70,16 @@ class ClientThread extends Thread{
 			String out;
 			String code;
 			String in;
+			
 			while (true)  {
 				
 	        	Scanner scn = new Scanner(System.in);
+	        	
+	        	Socket client = new Socket(this.ip,this.port); 
+				
+	        	DataOutputStream salida = new DataOutputStream (client.getOutputStream());
+				
+	        	ObjectInputStream entrada = new ObjectInputStream (client.getInputStream());
 	        	
 	        	code = scn.nextLine();
 	        	
@@ -131,6 +124,7 @@ class ClientThread extends Thread{
 	            }
 	            
 	            else if(code.equals("3")) {
+	            	
 	        		Response response = new Response("Estudiantes",null,3);
 	        		response.setDato("117690345");
 	        		
@@ -145,14 +139,15 @@ class ClientThread extends Thread{
 	            
 	            else if(code.equals("4")) {
 	            	
-	        		Response response = new Response("Estudiantes",null,4);
+	        		Response response2 = new Response("Estudiantes",null,4);
 	        		
-	        		out = Serializador.serializar(response);
+	        		out = Serializador.serializar(response2);
 	        		
 	            	salida.writeUTF(out);
-	            	
+	            		            	
 	            	ListaEnlazadaSimple<HashTable> tabla = (ListaEnlazadaSimple<HashTable>) entrada.readObject();
 	            	tabla.print();
+	
 	            }
 	            
 	            else if(code.equals("5")) {
@@ -171,15 +166,15 @@ class ClientThread extends Thread{
 	            	salida.writeUTF("Exit");
 	            	break;
 	            }
+	            
+	            salida.writeUTF("Exit");
+		        
+		        client.close();
+		
+		        entrada.close(); 
+		
+		        salida.close();
 	        }
-	        salida.writeUTF("Exit");
-	        
-	        client.close();
-	
-	        entrada.close(); 
-	
-	        salida.close(); 
-	        this.stop();
 	    }
 		catch(Exception e) {
 			System.out.println(e.getMessage());
