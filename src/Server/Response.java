@@ -11,7 +11,7 @@ public class Response {
 	int codigo;
 	String nombre_tabla;
 	ListaEnlazadaSimple<String> fila;
-
+	ListaEnlazadaSimple<HashTable> tabla;
 	String dato;
 
 	HashTable<String, ListaEnlazadaSimple<HashTable>> base_de_datos;
@@ -24,18 +24,6 @@ public class Response {
 		
 		this.fila = fila;
 		this.nombre_tabla = string;
-	}
-
-	public static void main(String args[]) throws IOException {
-		ListaEnlazadaSimple<String> lista = new ListaEnlazadaSimple<String>();
-		lista.addLast("Cedula");
-		lista.addLast("Carné");
-		lista.addLast("Nombre");
-		
-		
-		
-	
-		
 	}
 
 	public String getDato() {
@@ -69,7 +57,11 @@ public class Response {
 	public void setFila(ListaEnlazadaSimple<String> fila) {
 		this.fila = fila;
 	}
-
+	
+	public void setTabla(ListaEnlazadaSimple<HashTable> tabla) {
+		this.tabla = tabla;
+	}
+	
 	public HashTable<String, ListaEnlazadaSimple<HashTable>> getBase_de_datos() {
 		return base_de_datos;
 	}
@@ -79,6 +71,9 @@ public class Response {
 	}
 
 	
-
+	public ListaEnlazadaSimple<HashTable> getTabla(){
+		return this.tabla;
+	}
 	
 }
+

@@ -111,7 +111,6 @@ public class wind extends JFrame implements ActionListener {
 		JMenuItem tabla1 = new JMenuItem(Nombre.getTitulo());
 		mnArchivo.add(tabla1);
 		  
-		  System.out.println(Nombre.getTitulo());
 
 		JMenu mnVentana = new JMenu("Editar");
 		mnVentana.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -126,13 +125,15 @@ public class wind extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 
 		String titulos[] = new String[Datos.getValor()];
-		// lista.print();
+		System.out.println("wind");
+		lista.print();
 
 		Nodo<HashTable> aux = lista.getFirst();
 		int i = 0;
 		while (aux != null) {
-			titulos[i] = aux.getData().nombre;
-			System.out.println(titulos[i]);
+			titulos[i] = (String) aux.getData().get("nombre");
+			System.out.println(titulos);
+			
 			aux = aux.getNext();
 			i++;
 		}
@@ -145,18 +146,14 @@ public class wind extends JFrame implements ActionListener {
 		while (e1.hasMoreElements()) {
 			newkeys.add(e1.nextElement());
 		}
-		System.out.println(newkeys);
-		if (head.getData().size() == 0) {
-			String datos[][] = new String[head.getData().size() + 1][Datos.getValor()];
-			System.out.println(titulos);
+		if (head.getData().size() == 1) {
+			datos = new String[head.getData().size()][Datos.getValor()];
 
-			for (int x = 0; x < Datos.getValor(); x++) {
+			for (int x = 1; x < Datos.getValor(); x++) {
 				datos[0][x] = "-";
 			}
 		} else {
 			datos = new String[newkeys.size()][lista.getLen()];
-
-			System.out.println("else");
 			int columna = 0;
 
 			for (int fila = 0; fila < newkeys.size(); fila++) {
@@ -170,17 +167,7 @@ public class wind extends JFrame implements ActionListener {
 				}
 
 			}
-			for (int fila = 0; fila < newkeys.size(); fila++) {
-				head = lista.getFirst();
-				columna = 0;
-				while (head != null) {
-					System.out.println(datos[fila][columna]);
-					head = head.getNext();
-					columna++;
-
-				}
-
-			} 
+			
 		}
 
 		modelo = new DefaultTableModel(datos, titulos);

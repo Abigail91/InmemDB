@@ -10,11 +10,14 @@ import java.util.Scanner;
 import javax.swing.JFrame;
 
 import NOSQL.HashTable;
+import NOSQL.wind;
 import Serializador.Serializador;
 import estructurasDeDatos.ListaEnlazadaSimple;
 
 public class Client{
-
+		
+		private static Client cliente = new Client();
+		
 		private int port;
 
 		private String ip;
@@ -23,6 +26,13 @@ public class Client{
 		
 		private Thread thread;
 		
+		private Response response;
+		
+		public static boolean resFlag = false;
+		
+	private Client() {
+	}
+	
     public  void start()   { 
         try{ 
         	
@@ -48,10 +58,23 @@ public class Client{
         } 
     }
     
-    public static void main(String args[]) {
-    	Client cliente = new Client();
-    	cliente.start();
+    
+    public static Client getInstance() {
+    	return Client.cliente;
     }
+    
+	public void setResponse(Response response) {
+		this.response = response;
+		this.resFlag = true;
+		
+	}
+	public Response getResponse() {
+		return this.response;
+	}
+	
+	public static void main(String[] args) {
+		Client.getInstance().start();
+	}
 }
 
 class ClientThread extends Thread{
@@ -59,6 +82,7 @@ class ClientThread extends Thread{
 	private int port;
 
 	private String ip;
+	
 	
 	public ClientThread(String ip, int port) {
 		this.ip = ip;
@@ -72,103 +96,33 @@ class ClientThread extends Thread{
 			String in;
 			
 			while (true)  {
-				
-	        	Scanner scn = new Scanner(System.in);
-	        	
-	        	Socket client = new Socket(this.ip,this.port); 
+				Socket client = new Socket(this.ip,this.port);
 				
 	        	DataOutputStream salida = new DataOutputStream (client.getOutputStream());
 				
-	        	ObjectInputStream entrada = new ObjectInputStream (client.getInputStream());
+	        	DataInputStream entrada = new DataInputStream (client.getInputStream());
 	        	
-	        	code = scn.nextLine();
-	        	
-	            if(code.equals("1")) { 
-	            	
-	            	ListaEnlazadaSimple<String> lista = new ListaEnlazadaSimple<String>();
-	        		lista.addLast("Cedula","int");
-	        		lista.addLast("Carné","int");
-	        		lista.addLast("Nombre","String");
-	        		
-	        		Response response = new Response("Estudiantes",lista,1);
-	        		
-	        		out = Serializador.serializar(response);
-	        		
-	            	salida.writeUTF(out);
-	            	
-	            	
-	            	in = (String) entrada.readObject();
-	            	
-	            	System.out.println(in);
-	            	
-	            	
-	            }
-	            
-	            else if(code.equals("2")) {
-	            	
-	            	ListaEnlazadaSimple<String> lista2 = new ListaEnlazadaSimple<String>();
-	            	
-	        		lista2.addLast("117690345");
-	        		lista2.addLast("2018117463");
-	        		lista2.addLast("Abigail");
-	        		
-	        		Response response = new Response("Estudiantes",lista2,2);
-	        		
-	        		out = Serializador.serializar(response);
-	        		
-	            	salida.writeUTF(out);
-	            	
-	            	in = (String) entrada.readObject();
-	            	System.out.println(in);
-
-	            }
-	            
-	            else if(code.equals("3")) {
-	            	
-	        		Response response = new Response("Estudiantes",null,3);
-	        		response.setDato("117690345");
-	        		
-	        		out = Serializador.serializar(response);
-	        		
-	            	salida.writeUTF(out);
-	            	
-	            	in = (String) entrada.readObject();
-	            	System.out.println(in);
-	            	
-	            }
-	            
-	            else if(code.equals("4")) {
-	            	
-	        		Response response2 = new Response("Estudiantes",null,4);
-	        		
-	        		out = Serializador.serializar(response2);
-	        		
-	            	salida.writeUTF(out);
-	            		            	
-	            	ListaEnlazadaSimple<HashTable> tabla = (ListaEnlazadaSimple<HashTable>) entrada.readObject();
-	            	tabla.print();
-	
-	            }
-	            
-	            else if(code.equals("5")) {
-	            	
-	        		Response response = new Response("Estudiantes",null,5);
-	        		
-	        		out = Serializador.serializar(response);
-	        		
-	            	salida.writeUTF(out);
-	            	
-	            	in = (String) entrada.readObject();
-	            	System.out.println(in);
-	            }
-	            
-	            else if(code.equals("6")) {
-	            	salida.writeUTF("Exit");
-	            	break;
-	            }
-	            
+	        	if(Client.getInstance().resFlag == true) {
+		            if(Client.getInstance().getResponse().getCodigo() == 1) { 
+		           	
+		        		out = Serializador.serializar(Client.getInstance().getResponse());
+		       
+		            	salida.writeUTF(out);
+		            	
+		            	in = entrada.readUTF();
+		            		            	
+		            	Response response = Serializador.deserializar(in);
+		            	System.out.println("Cliente" + in);
+		            	response.getTabla().print();
+		            	
+		            	new wind(response.getTabla());
+		            	
+		            	Client.getInstance().resFlag = false;
+		            }
+		            
+		        }
+	        	this.sleep(1000);
 	            salida.writeUTF("Exit");
-		        
 		        client.close();
 		
 		        entrada.close(); 

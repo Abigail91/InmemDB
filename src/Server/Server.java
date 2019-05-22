@@ -20,7 +20,7 @@ public class Server {
 	
 	private int port = 9998;
 	
-	private ObjectOutputStream salida;
+	private DataOutputStream salida;
 	
 	private DataInputStream entrada;
 	
@@ -40,7 +40,7 @@ public class Server {
 				
 				socket = server.accept();
 
-	            salida = new ObjectOutputStream(socket.getOutputStream());
+	            salida = new DataOutputStream(socket.getOutputStream());
 	            
 	            entrada = new DataInputStream(socket.getInputStream());
 	               
@@ -74,11 +74,11 @@ class  ServerThread extends Thread{
 
 	private Socket socket;
 	
-	private ObjectOutputStream salida;
+	private DataOutputStream salida;
 	
 	private DataInputStream entrada;
 	
-	public ServerThread(Socket socket,ObjectOutputStream salida,DataInputStream entrada) {
+	public ServerThread(Socket socket,DataOutputStream salida,DataInputStream entrada) {
 		this.socket = socket;
 		this.salida = salida;
 		this.entrada = entrada;
@@ -93,39 +93,37 @@ class  ServerThread extends Thread{
 				in = entrada.readUTF();
 				
 				if(in.equals("Exit")) {
-                	
-                	//indica que el cliente ha cerrado la conexion
-                    System.out.println("Cliente ha enviado EXIT..."); 
-                                       
-                    //cierra el canal de informacion
                     this.socket.close(); 
-                    
-                    //indica que la conexion con el cliente se ha cerrado
-                    System.out.println("Conexion cerrada"); 
-                    
                     return;
                 }
 				
 				Response response = Serializador.deserializar(in);		
 				if (response.getCodigo() == 1) {
 					
-					HashTable.nuevo_esquema(response.getFila(),response.getNombre_tabla(),Server.getInstance().getBData());	
-					salida.writeObject("Se creo la tabla: "+ response.getNombre_tabla());
-		
+					HashTable.nuevo_esquema(response.getFila(),response.getNombre_tabla(),Server.getInstance().getBData());
+
+					Response responseServer = new Response();
+					responseServer.setTabla((ListaEnlazadaSimple<HashTable>) Server.getInstance().getBData().getTablas().get(response.getNombre_tabla()));
+				    
+
+					out = Serializador.serializar(responseServer);
+					System.out.println(Server.getInstance().getBData().getTablas());
+					salida.writeUTF(out);
+
 				}
 				
 				else if (response.getCodigo() == 2) {
 					
 					HashTable.agregar_fila(response.getFila(), response.getNombre_tabla(), Server.getInstance().getBData());
 					
-					salida.writeObject("Se agrego fila a la tabla: " + response.getNombre_tabla());
+					salida.writeUTF("Se agrego fila a la tabla: " + response.getNombre_tabla());
 				}
 				
 				else if (response.getCodigo() == 3) {
 					
 					HashTable.eliminar_fila(response.getDato(),response.getNombre_tabla(),Server.getInstance().getBData());
 					
-					salida.writeObject("Se elimino fila de la tabla: " + response.getNombre_tabla());
+					salida.writeUTF("Se elimino fila de la tabla: " + response.getNombre_tabla());
 				}
 				
 				else if (response.getCodigo() == 4) {
@@ -133,13 +131,13 @@ class  ServerThread extends Thread{
 					ListaEnlazadaSimple<HashTable> tabla = (ListaEnlazadaSimple<HashTable>) Server.getInstance().getBData().getTablas().get(response.getNombre_tabla());
 					tabla.print();
 					
-					salida.writeObject(tabla);
+					//salida.writeUTF(tabla);
 					
 				}
 				
 				else if (response.getCodigo() == 5) {
 					HashTable.eliminar_esquema(response.getNombre_tabla(),Server.getInstance().getBData());
-					salida.writeObject("Se eliminado la tabla: " + response.getNombre_tabla());
+					salida.writeUTF("Se eliminado la tabla: " + response.getNombre_tabla());
 				}
 				
 			}

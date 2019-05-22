@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
- 
+
+import Server.Client;
+import Server.Response;
+
 import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,6 +26,8 @@ public class Input {
         String nombre = "estudiantes";
         static ObjectMapper mapper = new ObjectMapper();
         ListaEnlazadaSimple<String> lista2 = new ListaEnlazadaSimple<String>();
+        static  Response response = new Response();
+      
 		
  
         public Input(int rep) {
@@ -98,7 +103,19 @@ public class Input {
                         	
                                 if(type == "String" && entrada3.getText().matches("[a-zA-z]+")) {
                                         ventana3.setVisible(false);
-                                        lista.addLast(entrada3.getText());
+                                        Input.lista.addLast(entrada3.getText());
+                                        Input.lista.print();
+                                        Input.response.setFila(Input.lista);
+                                        Input.response.setCodigo(1);
+                                        Input.response.setNombre_tabla(Nombre.entry.getText());
+                                        
+                                        System.out.println(Input.response.getNombre_tabla());
+                                        System.out.println(Input.response.getFila());
+                                        System.out.println(Input.response.getCodigo());
+                                        
+                                       
+                                        Client.getInstance().setResponse(Input.response);
+                                        
 
                                      
                                        
@@ -108,13 +125,14 @@ public class Input {
                                 else if(type == "Integer" && containsOnlyNumbers(entrada3.getText())) {
                                         ventana3.setVisible(false);
                                         lista.addLast(entrada3.getText());
-
+                                        Input.response.setFila(lista);
                                         new wind();
                                        
                                         
                                 }else if(type == "Long" && containsOnlyLong(entrada3.getText())) {
                                         ventana3.setVisible(false);
                                         lista.addLast(entrada3.getText());
+                                        Input.response.setFila(lista);
 
                                         new wind();
                                         
@@ -122,13 +140,14 @@ public class Input {
                                 }else if(type == "Double" && isDouble(entrada3.getText())) {
                                         ventana3.setVisible(false);
                                         lista.addLast(entrada3.getText());
-
+                                        Input.response.setFila(lista);
                                         new wind();
                                         
                                         
                                 }else if(type == "Float" && isFloat(entrada3.getText())) {
                                         ventana3.setVisible(false);
                                         lista.addLast(entrada3.getText());
+                                        Input.response.setFila(lista);
 
                                         new wind();
                                       
@@ -147,7 +166,7 @@ public class Input {
                                 if(type == "String" && entrada3.getText().matches("[a-zA-z]+")) {
                                         ventana3.setVisible(false);
                                         new Interface();
-                                        lista.addLast(entrada3.getText());
+                                        Input.lista.addLast(entrada3.getText());
 
                                         Interface.rep = Interface.rep - 1;
                                         

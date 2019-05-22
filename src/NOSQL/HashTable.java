@@ -11,51 +11,22 @@ public class HashTable<K,T> extends Hashtable{
 	public String nombre;
 	public String tipo;
 
-	public static void main(String args[]) {
-		ListaEnlazadaSimple<String> lista = new ListaEnlazadaSimple<String>();
-		lista.addLast("Cedula","int");
-		lista.addLast("Carné","int");
-		lista.addLast("Nombre","String");
-
-		
-		ListaEnlazadaSimple<String> lista2 = new ListaEnlazadaSimple<String>();
-		lista2.addLast("117690345");
-		lista2.addLast("2018117463");
-		lista2.addLast("Abigail");
-		
-		ListaEnlazadaSimple<String> lista3 = new ListaEnlazadaSimple<String>();
-		lista3.addLast("1");
-		lista3.addLast("117463");
-		lista3.addLast("Victoria");
-		
-		ListaEnlazadaSimple<String> lista4 = new ListaEnlazadaSimple<String>();
-		lista4.addLast("2");
-		lista4.addLast("11");
-		lista4.addLast("Haziel");
-	
-		baseDeDatos based = new baseDeDatos();
-		
-		nuevo_esquema(lista,"Estudiantes",based);
-		HashTable.agregar_fila(lista2,"Estudiantes",based);
-		
-		
-		ListaEnlazadaSimple<HashTable> listap = (ListaEnlazadaSimple<HashTable>) based.getTablas().get("Estudiantes");
-		listap.print();
-		
-		//HashTable.agregar_fila(lista3,"Estudiantes");
-		HashTable.eliminar_fila("117690345","Estudiantes",based);
-		//System.out.println(baseDeDatos.tablas);
-		//HashTable.agregar_fila(lista4,"Estudiantes");
-		//eliminar_esquema("Estudiantes");
-		ListaEnlazadaSimple<HashTable> listap1 = (ListaEnlazadaSimple<HashTable>) based.getTablas().get("Estudiantes");
-		listap1.print();
-		
-		
-		
-	}
+	public HashTable() {}
 	
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+	public String getNombre() {
+		return nombre;
 	}
 
 	public static ListaEnlazadaSimple<HashTable> nuevo_esquema(ListaEnlazadaSimple<String> titulos,String nombre, baseDeDatos bdatos) {
@@ -65,6 +36,7 @@ public class HashTable<K,T> extends Hashtable{
 		Nodo<String> aux = titulos.getFirst();
 		while (aux != null) {
 			HashTable<String,String> columna = new HashTable<String,String>();
+			columna.put("nombre",aux.getData());
 			columna.nombre = aux.getData();
 			columna.tipo = aux.getTipo();
 			tabla.addLast(columna);
