@@ -1,6 +1,8 @@
 package Server;
 
 import java.net.*;
+import java.util.ArrayList;
+import java.util.Enumeration;
 
 import NOSQL.HashTable;
 import NOSQL.baseDeDatos;
@@ -138,6 +140,23 @@ class  ServerThread extends Thread{
 				else if (response.getCodigo() == 5) {
 					HashTable.eliminar_esquema(response.getNombre_tabla(),Server.getInstance().getBData());
 					salida.writeUTF("Se eliminado la tabla: " + response.getNombre_tabla());
+				}
+				else if (response.getCodigo() == 6) {
+					ListaEnlazadaSimple<String> newkeys = new ListaEnlazadaSimple<String>();
+
+					Enumeration<String> e1 = Server.getInstance().getBData().tablas.keys();
+
+					while (e1.hasMoreElements()) {
+						newkeys.addLast(e1.nextElement());
+					}
+					Response responseServer = new Response();
+					responseServer.setFila(newkeys);
+					System.out.println(newkeys);
+				    
+
+					out = Serializador.serializar(responseServer);
+					salida.writeUTF(out);
+
 				}
 				
 			}

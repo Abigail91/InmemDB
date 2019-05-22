@@ -81,16 +81,23 @@ public class Ventana extends JFrame implements ActionListener{
 	    super.dispose();
 	}
 
-	 public void actionPerformed(ActionEvent e) {
- 		this.setVisible(false);
- 		new Nombre();
-	 }
+	 
 	 
  		
 public static void main(String[] args) {
 	
 	new Ventana();
 	Client.getInstance().start();
+}
+
+
+
+
+@Override
+public void actionPerformed(ActionEvent arg0) {
+	this.setVisible(false);
+		new Nombre();
+	
 }
 
 }

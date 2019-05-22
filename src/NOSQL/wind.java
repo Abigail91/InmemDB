@@ -3,6 +3,8 @@ package NOSQL;
 import java.awt.EventQueue;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import Server.Client;
+
 import javax.swing.*;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.EmptyBorder;
@@ -52,11 +54,16 @@ public class wind extends JFrame implements ActionListener {
 
 		JMenuItem mntmFila = new JMenuItem("Fila");
 		mnNewMenu.add(mntmFila);
+		
+		JMenuItem mntmTabla = new JMenuItem("Tabla");
+		mntmTabla.addActionListener(this);
+		mnNewMenu.add(mntmTabla);
 
 		  
-		JMenu mnArchivo = new JMenu("tablas");
+		JMenu mnArchivo = new JMenu("Tablas");
 		mnArchivo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		menuBar.add(mnArchivo);
+		mnArchivo.addActionListener(muestra_tabla);
 		
 
 		JMenu mnVentana = new JMenu("Editar");
@@ -120,11 +127,17 @@ public class wind extends JFrame implements ActionListener {
 		JMenuItem mntmFila = new JMenuItem("Fila");
 		mntmFila.addActionListener(action);
 		mnNewMenu.add(mntmFila);
+		
+		JMenuItem mntmTabla = new JMenuItem("Tabla");
+		mntmTabla.addActionListener(this);
+		mnNewMenu.add(mntmTabla);
 
 
 		JMenu mnArchivo = new JMenu("Tablas");
 		mnArchivo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		menuBar.add(mnArchivo);
+		mnArchivo.addActionListener(muestra_tabla);
+		
 		
 		
 		JMenuItem tabla1 = new JMenuItem(Nombre.getTitulo());
@@ -213,6 +226,18 @@ public class wind extends JFrame implements ActionListener {
 		}
 
 	};
+	
+	AbstractAction muestra_tabla = new AbstractAction() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("presiono tablas");
+			 Input.response.setFila(Input.lista);
+             Input.response.setCodigo(6);
+             Client.getInstance().setResponse(Input.response);
+		}
+
+	};
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
 		component.addMouseListener(new MouseAdapter() {
@@ -236,9 +261,9 @@ public class wind extends JFrame implements ActionListener {
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-
-	}
+	public void actionPerformed(ActionEvent e) {
+ 		this.setVisible(false);
+ 		new Nombre();
+	 }
 
 }

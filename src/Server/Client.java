@@ -28,6 +28,8 @@ public class Client{
 		
 		private Response response;
 		
+		private ListaEnlazadaSimple l = new ListaEnlazadaSimple();
+		
 		public static boolean resFlag = false;
 		
 	private Client() {
@@ -112,16 +114,27 @@ class ClientThread extends Thread{
 		            	in = entrada.readUTF();
 		            		            	
 		            	Response response = Serializador.deserializar(in);
-		            	System.out.println("Cliente" + in);
-		            	response.getTabla().print();
+		            	
 		            	
 		            	new wind(response.getTabla());
 		            	
 		            	Client.getInstance().resFlag = false;
-		            }
+		            }else  if(Client.getInstance().getResponse().getCodigo() == 6) { 
+			           	
+			        		out = Serializador.serializar(Client.getInstance().getResponse());
+			       
+			            	salida.writeUTF(out);
+			            	
+			            	in = entrada.readUTF();
+			            		            	
+			            	Response response = Serializador.deserializar(in);
+			            	response.getFila().print();
+			            	
+			            	
+			            	Client.getInstance().resFlag = false;
+			            }
 		            
 		        }
-	        	this.sleep(1000);
 	            salida.writeUTF("Exit");
 		        client.close();
 		
