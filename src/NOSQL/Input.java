@@ -108,12 +108,6 @@ public class Input {
                                         Input.response.setFila(Input.lista);
                                         Input.response.setCodigo(1);
                                         Input.response.setNombre_tabla(Nombre.entry.getText());
-                                        
-                                        System.out.println(Input.response.getNombre_tabla());
-                                        System.out.println(Input.response.getFila());
-                                        System.out.println(Input.response.getCodigo());
-                                        
-                                       
                                         Client.getInstance().setResponse(Input.response);
                                         
 

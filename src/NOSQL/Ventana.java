@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import Server.Client;
+import estructurasDeDatos.ListaEnlazadaSimple;
 
 public class Ventana extends JFrame implements ActionListener{
 	JLabel vent;

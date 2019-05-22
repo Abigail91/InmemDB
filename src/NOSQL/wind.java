@@ -58,10 +58,6 @@ public class wind extends JFrame implements ActionListener {
 		mnArchivo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		menuBar.add(mnArchivo);
 		
-		JMenuItem tabla1 = new JMenuItem(Nombre.getTitulo());
-		mnArchivo.add(tabla1);
-		  
-		  System.out.println(Nombre.getTitulo());
 
 		JMenu mnVentana = new JMenu("Editar");
 		mnVentana.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -74,6 +70,28 @@ public class wind extends JFrame implements ActionListener {
 		contentPane.setForeground(Color.MAGENTA);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		
+		String datos[][] = {{""}};
+		String titulo[] = {""};
+		
+		modelo = new DefaultTableModel(datos,titulo);
+		tabla = new JTable(modelo);
+
+		JScrollPane sp = new JScrollPane(tabla);
+		GroupLayout gl_contentPane = new GroupLayout(contentPane);
+		gl_contentPane.setHorizontalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+						.addComponent(sp, GroupLayout.PREFERRED_SIZE, 800, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(800, Short.MAX_VALUE)));
+		gl_contentPane.setVerticalGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_contentPane.createSequentialGroup()
+						.addComponent(sp, GroupLayout.PREFERRED_SIZE, 800, GroupLayout.PREFERRED_SIZE)
+						.addContainerGap(800, Short.MAX_VALUE)));
+		contentPane.setLayout(gl_contentPane);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	
+		setVisible(true);
+		
 
 	}
 
@@ -108,6 +126,7 @@ public class wind extends JFrame implements ActionListener {
 		mnArchivo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		menuBar.add(mnArchivo);
 		
+		
 		JMenuItem tabla1 = new JMenuItem(Nombre.getTitulo());
 		mnArchivo.add(tabla1);
 		  
@@ -125,15 +144,12 @@ public class wind extends JFrame implements ActionListener {
 		setContentPane(contentPane);
 
 		String titulos[] = new String[Datos.getValor()];
-		System.out.println("wind");
 		lista.print();
 
 		Nodo<HashTable> aux = lista.getFirst();
 		int i = 0;
 		while (aux != null) {
 			titulos[i] = (String) aux.getData().get("nombre");
-			System.out.println(titulos);
-			
 			aux = aux.getNext();
 			i++;
 		}
@@ -149,7 +165,7 @@ public class wind extends JFrame implements ActionListener {
 		if (head.getData().size() == 1) {
 			datos = new String[head.getData().size()][Datos.getValor()];
 
-			for (int x = 1; x < Datos.getValor(); x++) {
+			for (int x = 0; x < Datos.getValor(); x++) {
 				datos[0][x] = "-";
 			}
 		} else {
