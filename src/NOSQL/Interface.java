@@ -25,6 +25,14 @@ import java.awt.Dimension;
 import javax.swing.JButton;
  
 public class Interface extends JFrame implements ActionListener{
+      		/**
+ * Esta clase se encarga de manejar la interfaz grafica
+ 
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
  
         private JPanel contentPane;
         JRadioButton b1;
@@ -39,6 +47,13 @@ public class Interface extends JFrame implements ActionListener{
  
  
         public Interface() {
+              		/**
+ * Este metodo se encarga de el manejo de la interfaz y su creacion
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
                 setResizable(false);
                 setSize(400, 400);
                 setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\DELL\\Desktop\\log.png"));
@@ -135,6 +150,13 @@ public class Interface extends JFrame implements ActionListener{
        
        
         public void repeticiones(int rep) {
+              		/**
+ * Este metodo se encarga de las repeticiones en la interfaz grafica
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
                 
                 if(rep == 0) {
                     setVisible(false);
