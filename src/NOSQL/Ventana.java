@@ -14,6 +14,13 @@ import Server.Client;
 import estructurasDeDatos.ListaEnlazadaSimple;
 
 public class Ventana extends JFrame implements ActionListener{
+	     		/**
+ * Esta clase se encarga de declarar la ventana
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 	JLabel vent;
 	public Ventana()  {
 	setSize(800,800);
@@ -78,6 +85,16 @@ public class Ventana extends JFrame implements ActionListener{
 	};
 	
 	public void CloseFrame(){
+		  		/**
+ * Este metodo se encarga de cerrar el frame
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
+		
+		
+
 	    super.dispose();
 	}
 
