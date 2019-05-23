@@ -12,6 +12,13 @@ import estructurasDeDatos.ListaEnlazadaSimple;
 import java.io.*;
 
 public class Server {
+			  		/**
+ * Esta clase  se encarga del manejo del server
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 	
 	
 	private static Server servidor = new Server();
@@ -33,6 +40,13 @@ public class Server {
 	}
 	
 	public void start() {
+				  		/**
+ * Este metodo se encarga de inicializar el server
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		try {
 			server = new ServerSocket(port);
 			
@@ -59,6 +73,13 @@ public class Server {
 	}
 	
 	public static Server getInstance() {
+				  		/**
+ * Este metodo se encarga de obtener la instancia
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		return Server.servidor;
 	}
 	
