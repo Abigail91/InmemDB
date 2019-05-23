@@ -15,6 +15,13 @@ import Serializador.Serializador;
 import estructurasDeDatos.ListaEnlazadaSimple;
 
 public class Client{
+			  		/**
+ * Esta clase se encarga del manejo del cliente
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		
 		private static Client cliente = new Client();
 		
@@ -36,6 +43,13 @@ public class Client{
 	}
 	
     public  void start()   { 
+	    		  		/**
+ * Este metodo se encarga de inicializar el cliente
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
         try{ 
         	
         	FileReader reader = new FileReader("C:\\Users\\abiga\\Desktop\\InmemDB\\resources\\ClientProperties.properties");
@@ -62,15 +76,36 @@ public class Client{
     
     
     public static Client getInstance() {
+	    		  		/**
+ * Este metodo se encarga de obtener el estado del cliente
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
     	return Client.cliente;
     }
     
 	public void setResponse(Response response) {
+				  		/**
+ * Este metodo se encarga de establecer el response
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		this.response = response;
 		this.resFlag = true;
 		
 	}
 	public Response getResponse() {
+				  		/**
+ * Este metodo se encarga de obtener el response
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		return this.response;
 	}
 	
@@ -80,6 +115,13 @@ public class Client{
 }
 
 class ClientThread extends Thread{
+			  		/**
+ * Esta clase se encarga de manejar el thread del cliente
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 	
 	private int port;
 
