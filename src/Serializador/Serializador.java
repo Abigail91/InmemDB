@@ -16,6 +16,13 @@ import estructurasDeDatos.Nodo;
 
 
 public class Serializador {
+			  		/**
+ * Esta clase se encarga de serializar y deserealizar
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 	static ObjectMapper mapper = new ObjectMapper();
 	
 	public static <T> String serializar(Response Lista) throws IOException {
