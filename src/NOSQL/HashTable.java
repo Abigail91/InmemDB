@@ -7,6 +7,13 @@ import java.util.Hashtable;
 import estructurasDeDatos.ListaEnlazadaSimple;
 import estructurasDeDatos.Nodo;
 public class HashTable<K,T> extends Hashtable{
+	/**
+ * Esta clase se encarga de el manejo de los hashtables en el proyecto.
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 
 	public String nombre;
 	public String tipo;
@@ -14,18 +21,46 @@ public class HashTable<K,T> extends Hashtable{
 	public HashTable() {}
 	
 	public void setNombre(String nombre) {
+		/**
+ * Este metodo se encarga de asignar el nombre
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		this.nombre = nombre;
 	}
 
 	public String getTipo() {
+		/**
+ * Este metodo se encarga de obtener el tipo del dato
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		return tipo;
 	}
 
 	public void setTipo(String tipo) {
+		/**
+ * Este metodo se encarga de asiganr el tipo
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		this.tipo = tipo;
 	}
 
 	public String getNombre() {
+		/**
+ * Este metodo se encarga de obtener el nombre
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		return nombre;
 	}
 
@@ -53,6 +88,13 @@ public class HashTable<K,T> extends Hashtable{
 	}
 	
 	public static void agregar_fila(ListaEnlazadaSimple<String> nuevo_dato,String tabla, baseDeDatos bdatos) {
+		/**
+ * Este metodo se encarga de agregar una fila por medio de listas enlazadas
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		
 		ListaEnlazadaSimple<HashTable> tab =  (ListaEnlazadaSimple<HashTable>) bdatos.getTablas().get(tabla);
 		Nodo<String> aux = nuevo_dato.getFirst();
@@ -69,6 +111,13 @@ public class HashTable<K,T> extends Hashtable{
 		
 	}
 	public static void eliminar_fila(String dato, String tabla,baseDeDatos bdatos) {
+		/**
+ * Este metodo se encarga de eliminar una fila por medio de listas enlazadas
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		ListaEnlazadaSimple<HashTable> tab =  (ListaEnlazadaSimple<HashTable>) (bdatos.getTablas().get(tabla));
 		Nodo<HashTable> aux2 = tab.getFirst();
 		while (aux2 != null) {
@@ -84,6 +133,13 @@ public class HashTable<K,T> extends Hashtable{
 	}
 		
 	public void print(HashTable<String,HashTable> hash) {
+		/**
+ * Este metodo se encarga de imprimir el hashtable en pantalla
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		String response = "";
 		
 		Enumeration<String> keys = hash.keys();
@@ -98,6 +154,13 @@ public class HashTable<K,T> extends Hashtable{
 	}
 	
 	public static void eliminar_esquema(String nombre,baseDeDatos bdatos) {
+		/**
+ * Este metodo se encarga de eliminar un esquema
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		
 		bdatos.getTablas().remove(nombre);
 		System.out.println(bdatos.getTablas());
