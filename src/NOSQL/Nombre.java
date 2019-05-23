@@ -8,6 +8,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class Nombre {
+	     		/**
+ * Esta clase se encarga de manejar el nombre dado
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 	JFrame ven;
 	static JTextField entry;
 	
@@ -42,6 +49,13 @@ public class Nombre {
      
     
      public static String getTitulo() { 
+	          		/**
+ * Este metodo se encarga de obtener el titulo
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
     	 String title = entry.getText();
     	 return title; 
     	 
