@@ -29,6 +29,13 @@ import java.awt.SystemColor;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class wind extends JFrame implements ActionListener {
+			  		/**
+ * Esta clase se encarga de manejar las ventanas
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 
 	JPanel contentPane;
 	String datos[][];
@@ -103,6 +110,13 @@ public class wind extends JFrame implements ActionListener {
 	}
 
 	public wind(ListaEnlazadaSimple<HashTable> lista) {
+				  		/**
+ * Este metodo se encarga del manejo de los hashtables en la ventana
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\DELL\\Desktop\\log.png"));
 		setFont(new Font("Lucida Handwriting", Font.PLAIN, 13));
 		setTitle("InmemDB");
@@ -240,6 +254,13 @@ public class wind extends JFrame implements ActionListener {
 	};
 
 	private static void addPopup(Component component, final JPopupMenu popup) {
+				  		/**
+ * Este metodo se encarga de añadir un popup
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 		component.addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				if (e.isPopupTrigger()) {
