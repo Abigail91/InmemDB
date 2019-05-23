@@ -17,6 +17,13 @@ import javax.swing.JTextField;
 import estructurasDeDatos.ListaEnlazadaSimple;
  
 public class Input {
+	/**
+ * Esta clase se encarga de el manejo de los inputs
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
         JFrame ventana3;
         static JTextField entrada3;
         JLabel texto3;
@@ -31,7 +38,13 @@ public class Input {
 		
  
         public Input(int rep) {
-        		
+        		/**
+ * Este metodo se encarga de declarar el input
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
                 this.rep = rep;
                 ventana3 = new JFrame();
                 ventana3.setSize(400, 400);
@@ -50,10 +63,24 @@ public class Input {
         }
  
         public static Object getValue() {
+		     		/**
+ * Este metodo se encarga de obtener el valor del objeto
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
                 return entrada3.getText();
         }
        
         public static boolean containsOnlyNumbers(String str) {
+		     		/**
+ * Este metodo se encarga de verificar que solo hayan numeros
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
                 for (int i = 0; i < str.length(); i++) {
                       if (!Character.isDigit(str.charAt(i)))
                         return false;
@@ -74,6 +101,13 @@ public class Input {
         }
        
         public static boolean isDouble(String strNum) {
+		     		/**
+ * Este metodo se encarga de verificar que el darto sea doble
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
             try {
                 double d = Double.parseDouble(strNum);
             } catch (NumberFormatException | NullPointerException nfe) {
@@ -83,6 +117,13 @@ public class Input {
         }
        
         public static boolean isFloat(String strNum) {
+		     		/**
+ * Este metodo se encarga de verificar que el dato sea float
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
             try {
                 double d = Float.parseFloat(strNum);
             } catch (NumberFormatException | NullPointerException nfe) {
