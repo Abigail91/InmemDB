@@ -8,6 +8,13 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 public class Datos {
+	/**
+ * Esta clase se encarga de los datos.
+ * @author: Abigail Abarca, Haziel Gudino, Daniel Nunez, Victoria Ruiz
+ 
+ * @version: 5/22/2019
+ 
+ */
 	JFrame ventana2;
 	static JTextField entrada;
 	JLabel texto;
@@ -35,7 +42,7 @@ public class Datos {
 		public void actionPerformed(ActionEvent e) {
 	    	ventana2.setVisible(false);	
 	 	    new Interface();
-	 	    Interface.rep = getValor();} //Le asigna el número de columnas al atributo rep de Interface
+	 	    Interface.rep = getValor();} //Le asigna el nÃºmero de columnas al atributo rep de Interface
 	    	
 	};    
 	    	//if(lupa instanceof String) {
